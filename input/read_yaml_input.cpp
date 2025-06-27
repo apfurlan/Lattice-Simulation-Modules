@@ -75,14 +75,16 @@ private:
 int main()
 {
 
-	ReadInput input("input.yaml") ;
-	input.printInputParameters()  ;
+    YAML::Node config = YAML::LoadFile("input.yaml");
 
-	Lx       = input.getSimulationParameters().Lx       ;
-	Ly       = input.getSimulationParameters().Ly       ;
-	N        = Lx * Ly                        			;
-	geometry = input.getSimulationParameters().geometry ;
-	nruns    = input.getSimulationParameters().nruns   	;
+	//ReadInput input("input.yaml") ;
+	//input.printInputParameters()  ;
+
+    // Lx       = input.getSimulationParameters().Lx       ;
+	// Ly       = input.getSimulationParameters().Ly       ;
+	// N        = Lx * Ly                        			;
+	// geometry = input.getSimulationParameters().geometry ;
+	// nruns    = input.getSimulationParameters().nruns   	;
 
 	//std::cout << input.getSimulationParameters() << std::endl ; 				
 
