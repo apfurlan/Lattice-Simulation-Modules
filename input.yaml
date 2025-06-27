@@ -1,0 +1,8 @@
+name: 
+  "Percolation Ice Model"
+lattice :
+  Lx: 10
+  Ly: 10
+  geometry: "square"
+simulation:
+  number_of_steps: 1000
