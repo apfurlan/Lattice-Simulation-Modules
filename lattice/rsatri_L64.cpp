@@ -16,8 +16,110 @@
 #define N (WIDTH*HEIGHT)
 
 
-void nnbdlst(int ncoord, long vertex1[],
-	     long vertex2[], long nn[]) ;
+
+// void nnbdlst( int ncoord ,long vertex1[],
+// 	      long vertex2[], long nn[]){
+//   // define the bonds in the system for a triangular lattice
+  
+//   //#define connect(A,B) {vertex1[index] = A; vertex2[index++] = B;}
+//   //#define address(X,Y) ((((X)+WIDTH)%WIDTH)+(((Y)+HEIGHT)%HEIGHT)*WIDTH)
+  
+//   int x,y,index ; 
+//   for (index = x = 0; x < WIDTH; ++x){
+//     for (y = 0; y < HEIGHT; ++y) {
+
+//       int v1 = x + WIDTH*y;
+      
+//       int v2 =  ((((x+1)+WIDTH)%WIDTH)+(((y)+HEIGHT)%HEIGHT)*WIDTH) ; 
+            
+//       vertex1[index]   = v1 ;
+//       vertex2[index++] = v2 ;
+      
+//       nn[v1*ncoord + 0]=v2 ;
+      
+//       v2 = ((((x)+WIDTH)%WIDTH)+(((y+1)+HEIGHT)%HEIGHT)*WIDTH) ;
+      
+//       vertex1[index]   = v1 ;
+//       vertex2[index++] = v2 ;
+      
+//       nn[v1*ncoord + 1] = v2 ; 
+            
+//       v2 = ((((x+1)+WIDTH)%WIDTH)+(((y+1)+HEIGHT)%HEIGHT)*WIDTH) ;
+      
+//       vertex1[index]   = v1 ;
+//       vertex2[index++] = v2 ;
+      
+//       nn[v1*ncoord + 2] = v2 ;  
+//       nn[v1*ncoord + 3] = ((((x)+WIDTH)%WIDTH)+(((y-1)+HEIGHT)%HEIGHT)*WIDTH) ;
+//       //address(x,y-1);
+//       nn[v1*ncoord + 4] = ((((x-1)+WIDTH)%WIDTH)+(((y)+HEIGHT)%HEIGHT)*WIDTH) ;
+//       //address(x-1,y);
+//       nn[v1*ncoord + 5] = ((((x-1)+WIDTH)%WIDTH)+(((y-1)+HEIGHT)%HEIGHT)*WIDTH) ;
+//       //address(x-1,y-1);
+      
+//     }
+//   }
+
+//   if(index != (ncoord/2)*N) {std::cout<< "Error num. of  bonds "; exit(EXIT_FAILURE);}
+  
+//   return ; 
+// }
+
+class LatticeBonds{
+
+  lattice = [] ; 
+  
+  private : 
+
+    int i,j,index
+    int v1,v2
+
+  public : 
+
+    void setNNBondsList(ncoord,Lx,Ly){
+
+      //int i,j,index ; 
+      for (index = i = 0; i < Lx; ++i){
+        for (j = 0; j < Ly; ++j) {
+
+          int v1 = x + Lx*y;
+      
+          int v2 =  ((((x+1)+Lx)%Lx)+(((y)+Ly)%Ly)*Lx) ; 
+            
+          vertex1[index]   = v1 ;
+          vertex2[index++] = v2 ;
+      
+          nn[v1*ncoord + 0]=v2 ;
+      
+          v2 = ((((x)+Lx)%Lx)+(((y+1)+Ly)%Ly)*Lx) ;
+
+          vertex1[index]   = v1 ;
+          vertex2[index++] = v2 ;
+      
+          nn[v1*ncoord + 2] = v2 ;  
+          nn[v1*ncoord + 3] = ((((x)+Lx)%Lx)+(((y-1)+Ly)%Ly)*Lx) ;
+          //address(x,y-1);
+          nn[v1*ncoord + 4] = ((((x-1)+Lx)%Lx)+(((y)+Ly)%Ly)*Lx) ;
+          //address(x-1,y);
+          nn[v1*ncoord + 5] = ((((x-1)+Lx)%Lx)+(((y-1)+Ly)%Ly)*Lx) ;
+          //address(x-1,y-1);
+        }    
+    }
+  
+  
+    void setBondState(int bondIndex,int state){
+      lattice[bondIndex] = state ; 
+    }
+    //setBondIndex
+
+    int getBondState(int bondIndex) { return lattice[bondIndex]}
+    //set
+  }
+}
+
+
+// void nnbdlst(int ncoord, long vertex1[],
+// 	     long vertex2[], long nn[]) ;
 
 using namespace std ; 
 
@@ -320,50 +422,50 @@ int main(int argc, char * argv[])
 }
 
 
-void nnbdlst( int ncoord ,long vertex1[],
-	      long vertex2[], long nn[]){
-  // define the bonds in the system for a triangular lattice
+// void nnbdlst( int ncoord ,long vertex1[],
+// 	      long vertex2[], long nn[]){
+//   // define the bonds in the system for a triangular lattice
   
-  //#define connect(A,B) {vertex1[index] = A; vertex2[index++] = B;}
-  //#define address(X,Y) ((((X)+WIDTH)%WIDTH)+(((Y)+HEIGHT)%HEIGHT)*WIDTH)
+//   //#define connect(A,B) {vertex1[index] = A; vertex2[index++] = B;}
+//   //#define address(X,Y) ((((X)+WIDTH)%WIDTH)+(((Y)+HEIGHT)%HEIGHT)*WIDTH)
   
-  int x,y,index ; 
-  for (index = x = 0; x < WIDTH; ++x){
-    for (y = 0; y < HEIGHT; ++y) {
+//   int x,y,index ; 
+//   for (index = x = 0; x < WIDTH; ++x){
+//     for (y = 0; y < HEIGHT; ++y) {
 
-      int v1 = x + WIDTH*y;
+//       int v1 = x + WIDTH*y;
       
-      int v2 =  ((((x+1)+WIDTH)%WIDTH)+(((y)+HEIGHT)%HEIGHT)*WIDTH) ; 
+//       int v2 =  ((((x+1)+WIDTH)%WIDTH)+(((y)+HEIGHT)%HEIGHT)*WIDTH) ; 
             
-      vertex1[index]   = v1 ;
-      vertex2[index++] = v2 ;
+//       vertex1[index]   = v1 ;
+//       vertex2[index++] = v2 ;
       
-      nn[v1*ncoord + 0]=v2 ;
+//       nn[v1*ncoord + 0]=v2 ;
       
-      v2 = ((((x)+WIDTH)%WIDTH)+(((y+1)+HEIGHT)%HEIGHT)*WIDTH) ;
+//       v2 = ((((x)+WIDTH)%WIDTH)+(((y+1)+HEIGHT)%HEIGHT)*WIDTH) ;
       
-      vertex1[index]   = v1 ;
-      vertex2[index++] = v2 ;
+//       vertex1[index]   = v1 ;
+//       vertex2[index++] = v2 ;
       
-      nn[v1*ncoord + 1] = v2 ; 
+//       nn[v1*ncoord + 1] = v2 ; 
             
-      v2 = ((((x+1)+WIDTH)%WIDTH)+(((y+1)+HEIGHT)%HEIGHT)*WIDTH) ;
+//       v2 = ((((x+1)+WIDTH)%WIDTH)+(((y+1)+HEIGHT)%HEIGHT)*WIDTH) ;
       
-      vertex1[index]   = v1 ;
-      vertex2[index++] = v2 ;
+//       vertex1[index]   = v1 ;
+//       vertex2[index++] = v2 ;
       
-      nn[v1*ncoord + 2] = v2 ;  
-      nn[v1*ncoord + 3] = ((((x)+WIDTH)%WIDTH)+(((y-1)+HEIGHT)%HEIGHT)*WIDTH) ;
-      //address(x,y-1);
-      nn[v1*ncoord + 4] = ((((x-1)+WIDTH)%WIDTH)+(((y)+HEIGHT)%HEIGHT)*WIDTH) ;
-      //address(x-1,y);
-      nn[v1*ncoord + 5] = ((((x-1)+WIDTH)%WIDTH)+(((y-1)+HEIGHT)%HEIGHT)*WIDTH) ;
-      //address(x-1,y-1);
+//       nn[v1*ncoord + 2] = v2 ;  
+//       nn[v1*ncoord + 3] = ((((x)+WIDTH)%WIDTH)+(((y-1)+HEIGHT)%HEIGHT)*WIDTH) ;
+//       //address(x,y-1);
+//       nn[v1*ncoord + 4] = ((((x-1)+WIDTH)%WIDTH)+(((y)+HEIGHT)%HEIGHT)*WIDTH) ;
+//       //address(x-1,y);
+//       nn[v1*ncoord + 5] = ((((x-1)+WIDTH)%WIDTH)+(((y-1)+HEIGHT)%HEIGHT)*WIDTH) ;
+//       //address(x-1,y-1);
       
-    }
-  }
+//     }
+//   }
 
-  if(index != (ncoord/2)*N) {std::cout<< "Error num. of  bonds "; exit(EXIT_FAILURE);}
+//   if(index != (ncoord/2)*N) {std::cout<< "Error num. of  bonds "; exit(EXIT_FAILURE);}
   
-  return ; 
-}
+//   return ; 
+// }
