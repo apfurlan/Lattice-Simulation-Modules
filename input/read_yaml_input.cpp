@@ -72,11 +72,48 @@ private:
     SimulationParameters SimulationValues;
 };
 
+void ReadYamlInputFile(const YAML::Node& node, const std::string& prefix = "") {
+    try {
+        if (node.IsMap()) {
+            for (const auto& pair : node) {
+                std::string key = pair.first.as<std::string>();
+                std::cout << prefix << "Key: " << key;
+                
+                const YAML::Node& value = pair.second;
+                if (value.IsScalar()) {
+                    std::cout << ", Value: " << value.as<std::string>() << std::endl;
+                } else if (value.IsMap() || value.IsSequence()) {
+                    std::cout << " (Nested)" << std::endl;
+                    ReadYamlInputFile(value, prefix + "  "); // Recursively print nested structures
+                }
+            }
+        } else if (node.IsSequence()) {
+            for (size_t i = 0; i < node.size(); ++i) {
+                std::cout << prefix << "Item " << i << ":" << std::endl;
+                ReadYamlInputFile(node[i], prefix + "  "); // Recursively print sequence items
+            }
+        } else if (node.IsScalar()) {
+            std::cout << prefix << "Value:   " << node.as<std::string>() << std::endl;
+        }
+    } catch (const YAML::Exception& e) {
+            
+        throw std::runtime_error("YAML Error: " + std::string(e.what()));
+    
+    } catch (const std::exception& e) {
+        
+        throw std::runtime_error("Configuration Error: " + std::string(e.what()));
+    
+    }
+}
+
+
+
 int main()
 {
 
     YAML::Node config = YAML::LoadFile("input.yaml");
-
+    ReadYamlInputFile(config);
+    //std::cout << config << std::endl;
 	//ReadInput input("input.yaml") ;
 	//input.printInputParameters()  ;
 

@@ -1,5 +1,4 @@
-name: 
-  "Percolation Ice Model"
+name: "Percolation Ice Model"
 lattice :
   Lx: 10
   Ly: 10
