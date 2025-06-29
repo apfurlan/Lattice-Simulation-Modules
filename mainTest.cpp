@@ -32,8 +32,9 @@
 
 int main() {
 
-    auto& rng = RandomGenerator::Get();
-    
+    auto & rng = RandomGenerator::Get();
+    //std::cout << rng << " " ; 
+
     // Generate random integers
     std::cout << "Random ints [10, 20]: ";
     for (int i = 0; i < 5; ++i) {
@@ -51,6 +52,12 @@ int main() {
     for (int i = 0; i < 5; ++i) {
         std::cout << rng.Sign() << " ";
     }
+
+    // Generate random signs
+    // std::cout << "\nRandom seed: ";
+    // for (int i = 0; i < 5; ++i) {
+    //     std::cout << rng.Seed(2) << " ";
+    // }
     
     return 0;
 
