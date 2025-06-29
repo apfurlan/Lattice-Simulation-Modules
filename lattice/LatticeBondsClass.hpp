@@ -1,5 +1,5 @@
-#ifndef LATTICE_BONDS_HPP
-#define LATTICE_BONDS_HPP
+#ifndef LATTICE_BONDS_CLASS_HPP
+#define LATTICE_BONDS_CLASS_HPP
 
 #include <utility>
 #include <stdexcept>

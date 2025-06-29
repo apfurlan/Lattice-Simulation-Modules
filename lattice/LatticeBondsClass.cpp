@@ -1,4 +1,4 @@
-#include "LatticeBonds.hpp"
+#include "LatticeBondsClass.hpp"
 #include <iostream>
 
 LatticeBonds::LatticeBonds(int nCoord, int Lx, int Ly) 
