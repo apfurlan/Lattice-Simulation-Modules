@@ -10,37 +10,71 @@ LatticeBonds::LatticeBonds(int nCoord, int Lx, int Ly)
 }
 
 LatticeBonds::~LatticeBonds() {
-    delete[] vertex1;
+    delete[] vertex1;   
     delete[] vertex2;
     delete[] nn;
     delete[] lattice;
 }
 
 void LatticeBonds::setNNBondsList() {
-    int index = 0;
-    for (int i = 0; i < Lx; ++i) {
-        for (int j = 0; j < Ly; ++j) {
-            int v1 = i + Lx * j;
-            
-            // Right neighbor (periodic boundary)
-            int v2 = (((i + 1) % Lx) + (j % Ly) * Lx);
-            vertex1[index] = v1;
-            vertex2[index++] = v2;
-            nn[v1 * nCoord + 0] = v2;
+    if (nCoord == 4) 
+    {
 
-            // Top neighbor (periodic boundary)
-            v2 = (i % Lx) + ((j + 1) % Ly) * Lx;
-            vertex1[index] = v1;
-            vertex2[index++] = v2;
-            nn[v1 * nCoord + 2] = v2;
+        int index = 0;
+        for (int x = 0; x < Lx; ++x)
+        {
+            for (int y = 0; y < Ly; ++y)
+            {
 
-            // Other neighbors
-            nn[v1 * nCoord + 3] = (i % Lx) + ((j - 1 + Ly) % Ly) * Lx;  // Bottom
-            nn[v1 * nCoord + 4] = ((i - 1 + Lx) % Lx) + (j % Ly) * Lx;  // Left
-            nn[v1 * nCoord + 5] = ((i - 1 + Lx) % Lx) + ((j - 1 + Ly) % Ly) * Lx; // Bottom-left
+                int v1 = x + Lx * y;
+                int v2 = ((x + 1) % Lx) + Lx * y; // horizontal bond
+
+                vertex1[index] = v1;
+                vertex2[index] = v2;
+
+                index++;
+
+                v2 = x + Lx * ((y + 1) % Ly); // vertical bond
+
+                vertex1[index] = v1;
+                vertex2[index] = v2;
+
+                index++;
+            }
+        }
+    } 
+    else if (nCoord == 6)  
+    { 
+        int index = 0;
+        for (int i = 0; i < Lx; ++i) {
+            for (int j = 0; j < Ly; ++j) {
+
+                int v1 = i + Lx * j;
+                // Right neighbor (periodic boundary)
+                int v2 = (((i + 1) % Lx) + (j % Ly) * Lx);
+                
+                
+                vertex1[index] = v1;
+                vertex2[index++] = v2;
+                nn[v1 * nCoord + 0] = v2;
+
+                // Top neighbor (periodic boundary)
+                v2 = (i % Lx) + ((j + 1) % Ly) * Lx;
+                vertex1[index]      = v1;
+                vertex2[index++]    = v2;
+                nn[v1 * nCoord + 2] = v2;
+
+                // Other neighbors
+                nn[v1 * nCoord + 3] = (i % Lx) + ((j - 1 + Ly) % Ly) * Lx;  // Bottom
+                nn[v1 * nCoord + 4] = ((i - 1 + Lx) % Lx) + (j % Ly) * Lx;  // Left
+                nn[v1 * nCoord + 5] = ((i - 1 + Lx) % Lx) + ((j - 1 + Ly) % Ly) * Lx; // Bottom-left
+            }
         }
     }
 }
+
+//int void LatticeBonds::getCoordBond() {
+
 
 std::pair<long, long> LatticeBonds::getBondVertices(int bondIndex) const {
     if (bondIndex < 0 || bondIndex >= (nCoord / 2) * N) {

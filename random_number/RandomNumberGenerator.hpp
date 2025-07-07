@@ -1,5 +1,5 @@
-#ifndef RANDOM_GENERATOR_CLASS_HPP
-#define RANDOM_GENERATOR_CLASS_HPP
+#ifndef RANDOM_NUMBER_GENERATOR_CLASS_HPP
+#define RANDOM_NUMBER_GENERATOR_CLASS_HPP
 
 
 #include <random>
@@ -10,18 +10,18 @@
  * Provides thread-safe, optimized methods for common random number generation needs.
  * Uses thread-local Mersenne Twister engine (std::mt19937_64) with automatic seeding.
  */
-class RandomGenerator {
+class RandomNumberGenerator {
 public:
     // Delete copy operations for singleton
-    RandomGenerator(const RandomGenerator&) = delete;
-    RandomGenerator& operator=(const RandomGenerator&) = delete;
+    RandomNumberGenerator(const RandomNumberGenerator&) = delete;
+    RandomNumberGenerator& operator=(const RandomNumberGenerator&) = delete;
     
     /**
      * @brief Get the singleton instance
-     * @return Reference to the thread-safe RandomGenerator instance
+     * @return Reference to the thread-safe RandomNumberGenerator instance
      */
-    static RandomGenerator& Get() noexcept {
-        static RandomGenerator instance;
+    static RandomNumberGenerator& Get() noexcept {
+        static RandomNumberGenerator instance;
         return instance;
     }
     
@@ -64,7 +64,7 @@ public:
     static void Seed(uint64_t seed_val) noexcept { engine.seed(seed_val); }
 
 private:
-    RandomGenerator() = default;
+    RandomNumberGenerator() = default;
     thread_local static std::mt19937_64 engine;
 };
 
